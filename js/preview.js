@@ -15,10 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generate resume
     generateResume(resumeData, language, style);
 
-    // Add export button handler
-    const exportBtn = document.getElementById('exportPdf');
-    if (exportBtn) {
-        exportBtn.addEventListener('click', exportToPdf);
+    // Add export button handlers
+    const exportPdfBtn = document.getElementById('exportPdf');
+    const exportWordBtn = document.getElementById('exportWord');
+    
+    if (exportPdfBtn) {
+        exportPdfBtn.addEventListener('click', exportToPdf);
+    }
+    
+    if (exportWordBtn) {
+        exportWordBtn.addEventListener('click', () => exportToWord(resumeData, language));
     }
 
     // Generate tips
@@ -131,4 +137,103 @@ async function exportToPdf() {
         console.error('Error generating PDF:', error);
         alert('Error generating PDF. Please try again.');
     }
+}
+
+function exportToWord(data, language) {
+    const doc = new docx.Document({
+        sections: [{
+            properties: {},
+            children: [
+                new docx.Paragraph({
+                    text: `${data.personalInfo.firstName} ${data.personalInfo.lastName}`,
+                    heading: docx.HeadingLevel.HEADING_1,
+                    spacing: { after: 200 }
+                }),
+                
+                // Contact Info
+                new docx.Paragraph({
+                    children: [
+                        new docx.TextRun({ text: "Email: ", bold: true }),
+                        new docx.TextRun(data.personalInfo.email)
+                    ],
+                    spacing: { after: 200 }
+                }),
+                data.personalInfo.phone ? new docx.Paragraph({
+                    children: [
+                        new docx.TextRun({ text: language === 'ru' ? "Телефон: " : "Phone: ", bold: true }),
+                        new docx.TextRun(data.personalInfo.phone)
+                    ],
+                    spacing: { after: 200 }
+                }) : null,
+
+                // Education
+                new docx.Paragraph({
+                    text: translations[language].education_section,
+                    heading: docx.HeadingLevel.HEADING_2,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.education.institution,
+                    spacing: { after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.education.degree,
+                    spacing: { after: 200 }
+                }),
+                new docx.Paragraph({
+                    children: [
+                        new docx.TextRun({ 
+                            text: language === 'ru' ? "Год окончания: " : "Graduation Year: ", 
+                            bold: true 
+                        }),
+                        new docx.TextRun(data.education.graduationYear)
+                    ],
+                    spacing: { after: 200 }
+                }),
+
+                // Experience
+                new docx.Paragraph({
+                    text: translations[language].experience_section,
+                    heading: docx.HeadingLevel.HEADING_2,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.experience.position,
+                    heading: docx.HeadingLevel.HEADING_3,
+                    spacing: { after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.experience.company,
+                    spacing: { after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.experience.responsibilities,
+                    spacing: { after: 200 }
+                }),
+
+                // Skills
+                new docx.Paragraph({
+                    text: translations[language].skills_section,
+                    heading: docx.HeadingLevel.HEADING_2,
+                    spacing: { before: 400, after: 200 }
+                }),
+                new docx.Paragraph({
+                    text: data.skills.join(', '),
+                    spacing: { after: 200 }
+                })
+            ].filter(Boolean)
+        }]
+    });
+
+    docx.Packer.toBlob(doc).then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.setAttribute('style', 'display: none');
+        a.href = url;
+        a.download = 'resume.docx';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    });
 }
