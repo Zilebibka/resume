@@ -1,0 +1,106 @@
+/* Preview container */
+.preview-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Resume preview */
+.resume-preview {
+    background-color: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Classic style */
+.resume-classic {
+    font-family: 'Times New Roman', serif;
+}
+
+.resume-classic h1 {
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.resume-classic section {
+    margin-bottom: 2rem;
+}
+
+/* Minimal style */
+.resume-minimal {
+    font-family: 'Arial', sans-serif;
+}
+
+.resume-minimal h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.resume-minimal section {
+    margin-bottom: 1.5rem;
+}
+
+/* Tips section */
+.tips-section {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tips-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.tips-content {
+    color: #666;
+}
+
+.tips-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.tips-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.tips-content li::before {
+    content: "💡";
+    position: absolute;
+    left: 0;
+}
+
+/* Export section */
+.export-section {
+    text-align: center;
+}
+
+.export-btn {
+    background-color: #27ae60;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.export-btn:hover {
+    background-color: #219a52;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .resume-preview {
+        padding: 1rem;
+    }
+    
+    .resume-classic h1,
+    .resume-minimal h1 {
+        font-size: 1.5rem;
+    }
+} 

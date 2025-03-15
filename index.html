@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeGen - Генератор резюме</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeGen</div>
+        <div class="nav-links">
+            <a href="about.html" data-i18n="nav_about">О нас</a>
+            <a href="login.html" data-i18n="nav_login">Вход</a>
+            <a href="register.html" data-i18n="nav_register">Регистрация</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="filters">
+            <h3 data-i18n="resume_settings">Настройки резюме</h3>
+            <div class="filter-group">
+                <h4 data-i18n="language_select">Язык резюме</h4>
+                <label>
+                    <input type="radio" name="language" value="ru" checked> <span data-i18n="russian">Русский</span>
+                </label>
+                <label>
+                    <input type="radio" name="language" value="en"> <span data-i18n="english">English</span>
+                </label>
+            </div>
+            <div class="filter-group">
+                <h4 data-i18n="style_select">Стиль резюме</h4>
+                <label>
+                    <input type="radio" name="style" value="classic" checked> <span data-i18n="style_classic">Классический</span>
+                </label>
+                <label>
+                    <input type="radio" name="style" value="minimal"> <span data-i18n="style_minimal">Минималистичный</span>
+                </label>
+            </div>
+        </aside>
+
+        <main class="resume-form">
+            <h2 data-i18n="create_resume">Создание резюме</h2>
+            <form id="resumeForm">
+                <div class="form-section">
+                    <h3 data-i18n="personal_info">Личная информация</h3>
+                    <input type="text" name="firstName" data-i18n-placeholder="first_name" placeholder="Имя" required>
+                    <input type="text" name="lastName" data-i18n-placeholder="last_name" placeholder="Фамилия" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" data-i18n-placeholder="phone" placeholder="Телефон">
+                </div>
+
+                <div class="form-section">
+                    <h3 data-i18n="education">Образование</h3>
+                    <input type="text" name="institution" data-i18n-placeholder="institution" placeholder="Учебное заведение">
+                    <input type="text" name="degree" data-i18n-placeholder="degree" placeholder="Специальность">
+                    <input type="text" name="graduationYear" data-i18n-placeholder="graduation_year" placeholder="Год окончания">
+                </div>
+
+                <div class="form-section">
+                    <h3 data-i18n="work_experience">Опыт работы</h3>
+                    <input type="text" name="company" data-i18n-placeholder="company" placeholder="Компания">
+                    <input type="text" name="position" data-i18n-placeholder="position" placeholder="Должность">
+                    <textarea name="responsibilities" data-i18n-placeholder="responsibilities" placeholder="Обязанности и достижения"></textarea>
+                </div>
+
+                <div class="form-section">
+                    <h3 data-i18n="skills">Навыки</h3>
+                    <textarea name="skills" data-i18n-placeholder="skills_placeholder" placeholder="Ваши навыки (через запятую)"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" data-i18n="create_button">Создать резюме</button>
+            </form>
+        </main>
+    </div>
+
+    <script src="js/translations.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+</html> 
